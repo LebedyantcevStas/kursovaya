@@ -1,0 +1,44 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block content %}
+    <div class="hero-wrap hero-bread" style="background-image: url({% static 'store/images/orders.jpg'%});">
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+            <h1 class="mb-0 bread">Мои заказы</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+    <table class="table">
+        <thead class="thead-primary">
+        <tr class="text-center">
+            <th>Номер заказа</th>
+            <th>Дата заказа</th>
+            <th>Дата доставки</th>
+            <th>Время доставки</th>
+            <th>Дата возвращения</th>
+            <th>Адрес</th>
+            <th>Оплата</th>
+            <th>Статус заказа</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for p in data %}
+        <tr class="text-center">
+        <th><a href="{% url 'store:order' p.id %}">{{p.id}}</a></th>
+        <th>{{p.date_order}}</th>
+        <th>{{p.date_shipping}}</th>
+        <th>{{p.time_shipping}}</th>
+        <th>{{p.date_return}}</th>
+        <th>{{p.adress}}</th>
+        <th>{{p.payment_name}}</th>
+        <th>{{p.status_name}}</th>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+
+    {% endblock %}

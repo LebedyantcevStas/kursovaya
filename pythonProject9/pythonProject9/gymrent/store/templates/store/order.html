@@ -1,0 +1,49 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block content %}
+    <div class="hero-wrap hero-bread" style="background-image: url({% static 'store/images/orders.jpg'%});">
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+            <h1 class="mb-0 bread">Заказ №{{id}}</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+<table class="table">
+						    <thead class="thead-primary">
+						      <tr class="text-center">
+						        <th>&nbsp;</th>
+						        <th>Наименование</th>
+						        <th>Срок аренды, дней</th>
+								  <th>Цена за день аренды</th>
+						      </tr>
+						    </thead>
+						    <tbody>
+                            {% for p in data %}
+						      <tr class="text-center">
+						        <td class="image-prod">
+									<img class="img-fluid" src="/{{ p.product.image }}" alt="Colorlib Template" width="200" height="200">
+								</td>
+						        <td class="product-name">
+						        	<h3>{{p.product.name}}</h3>
+						        </td>
+								  <td >
+						        	{{p.days}}
+						        </td>
+								  <td class="price">{{p.product.price}}</td>
+								  {% endfor %}
+
+						    </tbody>
+						  </table>
+<div class="row justify-content-end">
+
+
+    			<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
+
+						<h3>Общая стоимость заказа:</h3>
+						<h3>{{total}} руб</h3>
+					</div>
+					</div>
+	</div>
+{% endblock %}

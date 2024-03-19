@@ -22,51 +22,28 @@
 						        <th>&nbsp;</th>
 						        <th>&nbsp;</th>
 						        <th>Наименование</th>
-						        <th>Цена</th>
-						        <th>Срок аренды, дней</th>
-						        <th>Итог</th>
+						        <th>Цена за день аренды</th>
 						      </tr>
 						    </thead>
 						    <tbody>
+							{% for p in data %}
 						      <tr class="text-center">
 						        <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
 						        
-						        <td class="image-prod"><div class="img" style="background-image:url({% static 'products/prod10.jpg'%});"></div></td>
+						        <td class="image-prod">
+									<img class="img-fluid" src="/{{ p.product.image }}" alt="Colorlib Template" width="200" height="200">
+								</td>
 						        
 						        <td class="product-name">
-						        	<h3>DFC B803</h3>
+						        	<h3>{{p.product.name}}</h3>
 						        </td>
 						        
-						        <td class="price">50</td>
+						        <td class="price">{{p.product.price}}</td>
 						        
-						        <td class="quantity">
-						        	<div class="input-group mb-3">
-					             	<input type="text" name="quantity" class="quantity form-control input-number" value="10" min="1" max="365">
-					          	</div>
-					          </td>
-						        
-						        <td class="total">500</td>
-						      </tr><!-- END TR-->
 
-						      <tr class="text-center">
-						        <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
-						        
-						        <td class="image-prod"><div class="img" style="background-image:url({% static 'products/prod4.jpg'%});"></div></td>
-						        
-						        <td class="product-name">
-						        	<h3>Cardio Power T10</h3>
-						        </td>
-						        
-						        <td class="price">125</td>
-						        
-						        <td class="quantity">
-						        	<div class="input-group mb-3">
-					             	<input type="text" name="quantity" class="quantity form-control input-number" value="10" min="1" max="100">
-					          	</div>
-					          </td>
-						        
-						        <td class="total">1250</td>
 						      </tr><!-- END TR-->
+							{% endfor %}
+
 						    </tbody>
 						  </table>
 					  </div>
@@ -80,23 +57,63 @@
     					<h3>Итог</h3>
     					<p class="d-flex">
     						<span>Стоимость</span>
-    						<span>1750.00 руб.</span>
+    						<span>{{total}} руб/день.</span>
     					</p>
     					<p class="d-flex">
     						<span>Доставка</span>
-    						<span>0.00 руб.</span>
+    						<span>800.00 руб.</span>
     					</p>
     					<p class="d-flex">
     						<span>Скидка</span>
     						<span>0.00 руб.</span>
     					</p>
     					<hr>
-    					<p class="d-flex total-price">
-    						<span>К оплате</span>
-    						<span>1750 руб.</span>
-    					</p>
     				</div>
-    				<p><a href="checkout.html" class="btn btn-primary py-3 px-4">Перейти к оформлению</a></p>
+
+					<form method="post" action="http://127.0.0.1:8000/form2/">
+        			{% csrf_token %}
+						<table>
+							<tr>
+								<td>Выберите дату доставки:</td>
+								<td><input  type="date" name="date_shipping"></td>
+							</tr>
+							<tr>
+								<td>Выберите дату возврата:</td>
+								<td><input  type="date" name="date_return"></td>
+							</tr>
+							<tr>
+								<td>Выберите время доставки:</td>
+								<td><select name="select" size="1">
+    						<option selected value="10am - 12pm">10am - 12pm</option>
+    						<option selected value="12pm - 15pm">12pm - 15pm</option>
+							<option selected value="15pm - 18pm">15pm - 18pm</option>
+							<option selected value="18pm - 20pm">18pm - 20pm</option>
+							<option selected value="20pm - 22pm">20pm - 22pm</option>
+						</select></td>
+							</tr>
+							<tr>
+								<td>Контактный телефон:</td>
+								<td><input  name="phone"></td>
+							</tr>
+						<tr>
+								<td>Адрес:</td>
+								<td><textarea  name="adress"></textarea></td>
+							</tr>
+							<tr>
+								<td>Комментарии:</td>
+								<td><textarea  name="comment"></textarea></td>
+							</tr>
+							<tr>
+								<td>Выберите тип оплаты:</td>
+								<td><select name="select2" size="1">
+    						<option selected value="1">наличными при доставке</option>
+    						<option value="2">картой при доставке</option>
+						</select></td>
+							</tr>
+						</table>
+        <input type="submit"  value="Сделать заказ" />
+    </form>
+
     			</div>
     		</div>
 			</div>

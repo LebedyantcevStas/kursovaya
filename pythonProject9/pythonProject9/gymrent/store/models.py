@@ -16,6 +16,7 @@ class Product(models.Model):
   category = models.ForeignKey(Category, on_delete=models.CASCADE)
   created_time = models.DateTimeField(auto_now_add=True)
   updated_time = models.DateTimeField(auto_now=True)
+  amount = models.IntegerField(null=True)
 
 
   def __str__(self):
@@ -31,27 +32,34 @@ class Discount(models.Model):
   def __str__(self):
       return f"{self.product.name}_{self.value}%_{self.date_end}"
 
-class card_status(models.Model):
-  # status_id = models.AutoField()
-  status_name = models.CharField(max_length=100)
-
-
-class stuff(models.Model):
-  # stuff_id = models.AutoField()
-  stuff_num = models.CharField(max_length=15)
-  stuff_name = models.CharField(max_length=200)
 
 
 class order_status(models.Model):
-  # status_id = models.AutoField()
-  status_num = models.CharField(max_length=200)
+  status_name = models.CharField(max_length=200)
 
-class order_gym(models.Model):
-  order_date = models.DateTimeField()
-  plan_return_date = models.DateTimeField()
-  return_date = models.DateTimeField()
-  status_int = models.ForeignKey(order_status, on_delete=models.CASCADE)
-  forfeit = models.DecimalField(decimal_places=2, max_digits=8)
-  deposit = models.DecimalField(decimal_places=2, max_digits=8)
-  stuff = models.IntegerField()
-  model_e=models.ManyToManyField(Product)
+class payment(models.Model):
+ payment_name = models.CharField(max_length=200)
+
+
+class Cart(models.Model):
+  user=models.TextField()
+  product = models.ForeignKey(Product, on_delete=models.CASCADE)
+
+class Order(models.Model):
+  user=models.TextField(null=True)
+  date_order = models.DateTimeField(null=True)
+  date_shipping = models.DateField(null=True)
+  time_shipping=models.TextField(null=True)
+  status=models.IntegerField(null=True)
+  contactphone = models.TextField(null=True)
+  adress = models.TextField(null=True)
+  comment = models.TextField(null=True)
+  pay_type = models.IntegerField(null=True)
+  date_return = models.DateField(null=True)
+
+
+class order_gym_eqw(models.Model):
+  order=models.ForeignKey(Order, on_delete=models.CASCADE)
+  product = models.ForeignKey(Product, on_delete=models.CASCADE)
+  days = models.IntegerField(default=0)
+

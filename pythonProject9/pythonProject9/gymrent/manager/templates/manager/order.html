@@ -1,0 +1,55 @@
+<{% extends 'manager/base.html' %}
+{% load static %}
+{% block content %}
+
+ {% if status1 %}
+<form method="post" action="http://127.0.0.1:8000/form3/">
+        {% csrf_token %}
+		<input type="hidden" name="id" value="{{id}}"></p>
+        <input type="submit"  value="Передать в доставку" />
+</form>
+ {% endif %}
+
+ {% if status2 %}
+<form method="post" action="http://127.0.0.1:8000/form4/">
+        {% csrf_token %}
+		<input type="hidden" name="id" value="{{id}}"></p>
+        <input type="submit"  value="Отметить как доставленный" />
+</form>
+{% endif %}
+ {% if status3 %}
+<form method="post" action="http://127.0.0.1:8000/form5/">
+        {% csrf_token %}
+		<input type="hidden" name="id" value="{{id}}"></p>
+        <input type="submit"  value="Подтвердить возврат" />
+</form>
+ {% endif %}
+<table class="table">
+						    <thead class="thead-primary">
+						      <tr class="text-center">
+						        <th>Наименование</th>
+						        <th>Срок аренды, дней</th>
+								  <th>Цена за день аренды</th>
+						      </tr>
+						    </thead>
+						    <tbody>
+                            {% for p in data %}
+						      <tr class="text-center">
+
+						        <td class="product-name">
+						        	<h3>{{p.product.name}}</h3>
+						        </td>
+								  <td >
+						        	{{p.days}}
+						        </td>
+								  <td class="price">{{p.product.price}}</td>
+								  {% endfor %}
+
+						    </tbody>
+						  </table>
+
+
+
+						<h3>Общая стоимость заказа: {{total}} руб</h3>
+
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'manager/base.html' %}
+{% load static %}
+{% block content %}
+
+    <table class="table">
+        <thead class="thead-primary">
+        <tr class="text-center">
+            <th>Номер заказа</th>
+            <th>Дата заказа</th>
+            <th>Дата доставки</th>
+            <th>Время доставки</th>
+            <th>Адрес</th>
+            <th>Номер телефона</th>
+            <th>Комментарии</th>
+            <th>Оплата</th>
+            <th>Статус заказа</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for p in data %}
+        <tr class="text-center">
+        <th><a href="{% url 'manager:order' p.id %}">{{p.id}}</a></th>
+        <th>{{p.date_order}}</th>
+        <th>{{p.date_shipping}}</th>
+        <th>{{p.time_shipping}}</th>
+        <th>{{p.adress}}</th>
+        <th>{{p.contactphone}}</th>
+        <th>{{p.comment}}</th>
+        <th>{{p.payment_name}}</th>
+        <th>{{p.status_name}}</th>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+
+    {% endblock %}

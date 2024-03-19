@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'store',
+    'manager',
     'login'
 ]
 
@@ -78,11 +79,11 @@ WSGI_APPLICATION = 'gymrent.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'gym_rent_prod',
+        'NAME': 'gr',
         'USER': 'postgres',
         'PASSWORD': '1312St@s',
         'HOST': '127.0.0.1',
-        'PORT': '5432',
+        'PORT': '5432'
     }
 }
 
